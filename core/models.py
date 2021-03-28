@@ -38,7 +38,7 @@ class Student(models.Model):
     name = models.CharField(max_length=255, null=False, blank=False, unique=True)
     age = models.PositiveSmallIntegerField()
     email = models.EmailField(max_length=50)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, null=True, blank=True, on_delete=models.SET_NULL)
 
     class Meta:
         ordering = ['name']
