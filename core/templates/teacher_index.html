@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    </head>
+    <body>
+        {% for record in object_list %}
+        <div class="container"><br>
+            <div class="card col-md-12">
+              <div class="card-body">
+                <p class="card-text">Teacher's name: <b>{{ record.name }}</b></p>
+                <p class="card-text">Teacher's email: <b>{{ record.email }}</b></p>
+                  {% for group in record.group_set.all %}
+                    <p>The teacher works in this group: <b>{{ group.name}}</b></p>
+                  {% endfor %}
+              </div>
+            </div><br>
+        </div>
+        {% endfor %}
+    </body>
+</html>
