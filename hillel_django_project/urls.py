@@ -21,10 +21,10 @@ from core.views import GroupView, TeacherView, AddGroupView, AddStudentView, Edi
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
-    path('groups/', GroupView.as_view()),
-    path('teachers/', TeacherView.as_view()),
-    path('add_group/', AddGroupView.as_view()),
-    path('add_student/', AddStudentView.as_view()),
+    path('groups/', GroupView.as_view(), name='group_list'),
+    path('teachers/', TeacherView.as_view(), name='teacher_list'),
+    path('add_group/', AddGroupView.as_view(), name='add_group'),
+    path('add_student/', AddStudentView.as_view(), name='add_student'),
     path('edit_student/<int:pk>/', EditStudentView.as_view()),
     path('edit_group/<int:pk>/', EditGroupView.as_view()),
 ]

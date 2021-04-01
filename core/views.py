@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView, FormView, UpdateView
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
+from django.urls.base import reverse_lazy
 from core.models import Group, Teacher, Student
 from core.forms import MyGroupForm, MyStudentModelForm
 
@@ -15,6 +16,7 @@ class GroupView(ListView):
         context = super(GroupView, self).get_context_data(**kwargs)
         groups = Group.objects.get_group_with_student_count().prefetch_related('teachers')
         context['groups'] = groups
+        context['lst'] = [1, 2, 3, 4, 5, 6, 77, 88] #
         return context
 
 
@@ -43,7 +45,7 @@ class AddGroupView(TemplateView):
 
 class AddStudentView(CreateView):
     template_name = 'add_student.html'
-    success_url = '/groups/'
+    success_url = reverse_lazy('group_list')
     model = Student
     form_class = MyStudentModelForm
 
@@ -51,7 +53,7 @@ class AddStudentView(CreateView):
 class EditGroupView(FormView):
     template_name = 'add_group.html'
     form_class = MyGroupForm
-    success_url = '/groups/'
+    success_url = reverse_lazy('group_list')
 
     def get_initial(self):
         name = Group.objects.get(id=self.kwargs['pk']).name
@@ -67,7 +69,7 @@ class EditGroupView(FormView):
 
 class EditStudentView(UpdateView):
     template_name = 'add_student.html'
-    success_url = '/groups/'
+    success_url = reverse_lazy('group_list')
     model = Student
     form_class = MyStudentModelForm
 
